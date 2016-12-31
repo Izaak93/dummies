@@ -1,18 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dummies</title>
-    <link rel="stylesheet" type="text/css" href="main.css" />
-</head>
-<body>
-    <div class="container">
-        <div class="panel">
-            Panel
+    <head>
+        <meta charset="UTF-8">
+        <title>Dummies</title>
+        <script src="jQuery.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="panel">
+                <div class="slider_container">
+                    <label for="cross_percentage">Crossing percentage</label>
+                    <input class="slider" id="cross_percentage"
+                           type="range" min="0" max="100" step="1" value="50" />
+                    <div class="slider_value" id="cross_percentage_value">
+                        50
+                    </div>
+                </div>
+                <div class="slider_container">
+                    <label for="dummies_number">Dummies number</label>
+                    <input class="slider" id="dummies_number"
+                           type="range" min="2" max="10" step="1" value="2" />
+                    <div class="slider_value" id="dummies_number_value">
+                        4
+                    </div>
+                </div>
+                <div class="slider_container">
+                    <label for="mutation_percentage">Mutation percentage</label>
+                    <input class="slider" id="mutation_percentage"
+                           type="range" min="0" max="100" step="1" value="5" />
+                    <div class="slider_value" id="mutation_percentage_value">
+                        5
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="button" value="Refresh" />
+                </div>
+            </div>
+            <div class="essential">
+                Pictures
+            </div>
         </div>
-        <div class="essential">
-            Pictures
-        </div>
-    </div>
-</body>
+    </body>
 </html>
+
+<script src="dummies.js"></script>
+
+<script>
+    $(document).change( function() {
+            showPercentage();
+            showNumber();
+            showMutations();
+        }
+    );
+</script>
