@@ -1,0 +1,17 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.panel {
+    position: absolute;
+    width: 30%;
+    background-color: blue;
+}
+
+.essential {
+    position: absolute;
+    width: 70%;
+    right: 0px;
+    background-color: red;
+}
