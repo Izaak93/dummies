@@ -27,3 +27,47 @@
     width: 10%;
     right: 0px;
 }
+
+.dummy {
+    float: left;
+}
+
+.size-2 {
+    width: 50%;
+    background-color: aqua;
+}
+
+.size-3 {
+    width: 33.3%;
+    background-color: aquamarine;
+}
+
+.size-4 {
+    width: 25%;
+    background-color: darkorange;
+}
+
+.size-5 {
+    width: 20%;
+    background-color: cornsilk;
+}
+
+.size-6 {
+    width: 16.6%;
+    background-color: deeppink;
+}
+
+.size-7 {
+    width: 14.28%;
+    background-color: dodgerblue;
+}
+
+.size-8 {
+    width: 12.5%;
+    background-color: darkorchid;
+}
+
+.size-9 {
+    width: 11.1%;
+    background-color: palegoldenrod;
+}
