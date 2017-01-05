@@ -9,7 +9,7 @@
     position: absolute;
     width: 30%;
     height: 50vw;
-    background-color: dodgerblue;
+    background-color: aliceblue;
 }
 
 .essential {
@@ -17,7 +17,7 @@
     width: 70%;
     right: 0px;
     height: 50vw;
-    background-color: red;
+    background-color: floralwhite;
 }
 
 .slider_container>.slider {
@@ -34,58 +34,51 @@
 
 .dummy {
     float: left;
+    border: solid;
+    box-sizing: border-box;
 }
 
 .size-2 {
     width: 50%;
     height: 50%;
-    background-color: aqua;
 }
 
 .size-3 {
     width: 33.3%;
     height: 33.3%;
-    background-color: aquamarine;
 }
 
 .size-4 {
     width: 25%;
     height: 25%;
-    background-color: darkorange;
 }
 
 .size-5 {
     width: 20%;
     height: 20%;
-    background-color: cornsilk;
 }
 
 .size-6 {
     width: 16.6%;
     height: 16.6%;
-    background-color: deeppink;
 }
 
 .size-7 {
     width: 14.28%;
     height: 14.28%;
-    background-color: dodgerblue;
 }
 
 .size-8 {
     width: 12.5%;
     height: 12.5%;
-    background-color: darkorchid;
 }
 
 .size-9 {
     width: 11.1%;
     height: 11.1%;
-    background-color: palegoldenrod;
 }
 
 .size-10 {
     width: 10%;
     height: 10%;
-    background-color: yellow;
 }
