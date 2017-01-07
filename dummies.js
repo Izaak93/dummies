@@ -111,31 +111,35 @@ function updateEssential(div_number) {
     createDivsGrid(div_number, cross_percentage, mutation_percentage);
 }
 
-function drawDummy(row_size, i, j) {
-    var genotype = dummies[i][j];
-    var div = document.getElementById(i * row_size + j);
-    div.innerHTML = "";
-
-    var width = $("div#" + (i * row_size + j)).width();
-    var height = $("div#" + (i * row_size + j)).height();
-
-    var canvas = document.createElement("canvas");
-    canvas.setAttribute("id", (i * row_size + j) + "_dummy" );
-    canvas.setAttribute("width", String(width));
-    canvas.setAttribute("height", String(height));
-
+function drawLegs(width, height, canvas, genotype) {
     var ctx = canvas.getContext("2d");
     ctx.lineWidth = 0.055 * width;
     ctx.lineCap = "round";
+    ctx.strokeStyle = "#FF851B";
 
-    ctx.moveTo(genotype[0] * width, genotype[1] * height);
-    ctx.lineTo(genotype[2] * width, genotype[3] * height);
+    ctx.beginPath();
 
     ctx.moveTo(genotype[0] * width, genotype[1] * height);
     ctx.lineTo(genotype[4] * width, genotype[5] * height);
 
     ctx.moveTo(genotype[0] * width, genotype[1] * height);
     ctx.lineTo(genotype[6] * width, genotype[7] * height);
+
+    ctx.stroke();
+
+    ctx.closePath();
+}
+
+function drawBody(width, height, canvas, genotype) {
+    var ctx = canvas.getContext("2d");
+    ctx.lineWidth = 0.055 * width;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "orange";
+
+    ctx.beginPath();
+
+    ctx.moveTo(genotype[0] * width, genotype[1] * height);
+    ctx.lineTo(genotype[2] * width, genotype[3] * height);
 
     ctx.moveTo(genotype[8] * width, genotype[9] * height);
     ctx.lineTo(genotype[2] * width, genotype[3] * height);
@@ -144,6 +148,17 @@ function drawDummy(row_size, i, j) {
     ctx.lineTo(genotype[2] * width, genotype[3] * height);
 
     ctx.stroke();
+
+    ctx.closePath();
+}
+
+function drawHead(width, height, canvas, genotype) {
+    var ctx = canvas.getContext("2d");
+    ctx.lineWidth = 0.055 * width;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#FFDC00";
+
+    ctx.beginPath();
 
     var diameter = Math.sqrt(Math.pow((genotype[0] - genotype[2]) * width, 2) + Math.pow((genotype[1] - genotype[3]) * height, 2)) / 2;
 
@@ -157,6 +172,26 @@ function drawDummy(row_size, i, j) {
     ctx.arc(genotype[2] * width, genotype[3] * height - ray, ray, 0, 2 * Math.PI);
 
     ctx.stroke();
+
+    ctx.closePath();
+}
+
+function drawDummy(row_size, i, j) {
+    var genotype = dummies[i][j];
+    var div = document.getElementById(i * row_size + j);
+    div.innerHTML = "";
+
+    var width = $("div#" + (i * row_size + j)).width();
+    var height = $("div#" + (i * row_size + j)).height();
+
+    var canvas = document.createElement("canvas");
+    canvas.setAttribute("id", (i * row_size + j) + "_dummy" );
+    canvas.setAttribute("width", String(width));
+    canvas.setAttribute("height", String(height));
+
+    drawLegs(width, height, canvas, genotype);
+    drawBody(width, height, canvas, genotype);
+    drawHead(width, height, canvas, genotype);
 
     div.appendChild(canvas);
 }
