@@ -17,7 +17,11 @@
     width: 70%;
     right: 0px;
     height: 50vw;
-    background-color: floralwhite;
+    background-color: #001f3f;
+}
+
+.slider_container {
+    height: 5%;
 }
 
 .slider_container>.slider {
@@ -34,7 +38,7 @@
 
 .dummy {
     float: left;
-    border: solid;
+    border: solid aliceblue;
     box-sizing: border-box;
 }
 
@@ -81,4 +85,9 @@
 .size-10 {
     width: 10%;
     height: 10%;
+}
+
+label {
+    width: 40%;
+    display: inline-block;
 }
