@@ -1,8 +1,13 @@
+var prev_number_dummies = 2;    // see 112 - (updateEssential())
+
+/*
+ *  body parts  = [left foot, right foot, pelvis, neck, left hand, right hand]
+ *  short names = [LF, RF, P, N, LH, RH]
+ *  coords      = [(4, 5), (6, 7), (0, 1), (2, 3), (8, 9), (10, 11)]
+ * */
+
+var genotypes = [];
 var genotype_len = 12;
-
-var prev_number_dummies = 2;
-
-var dummies = [];
 
 function showPercentage() {
     var slider_value_div = document.getElementById("cross_percentage_value");
@@ -26,7 +31,7 @@ function showMutations() {
 function cross(ref_i, ref_j, cur_i, cur_j, cross_percentage) {
     for(var k = 0 ; k < genotype_len; ++k) {
         if(cross_percentage >= Math.random()) {
-            dummies[cur_i][cur_j][k] = dummies[ref_i][ref_j][k];
+            genotypes[cur_i][cur_j][k] = genotypes[ref_i][ref_j][k];
         }
     }
 }
@@ -34,7 +39,8 @@ function cross(ref_i, ref_j, cur_i, cur_j, cross_percentage) {
 function mutate(i, j, percentage) {
     for(var k = 0; k < genotype_len; ++k) {
         if(percentage >= Math.random()) {
-            dummies[i][j][k] = Math.random();
+            var local_value = (0.5 - Math.random()) / 10;
+            genotypes[i][j][k] += local_value;
         }
     }
 }
@@ -62,53 +68,59 @@ function crossAndMutate(row_size, ref_i, ref_j, cross_percentage, mutation_perce
     drawDummies(row_size);
 }
 
-function createDiv(div_number, i, j, cross_percentage, mutation_percentage) {
+function createDiv(row_size, i, j, cross_percentage, mutation_percentage) {
     var div = document.createElement("div");
-    div.setAttribute("id", div_number * i + j);
-    div.setAttribute("class", "dummy size-" + div_number);
-    div.setAttribute("onClick", "crossAndMutate(" + div_number + ", " + i + ", " + j + ", "
+    div.setAttribute("id", row_size * i + j);
+    div.setAttribute("class", "dummy size-" + row_size);
+    div.setAttribute("onClick", "crossAndMutate(" + row_size + ", " + i + ", " + j + ", "
         + cross_percentage + ", " + mutation_percentage + ");");
     return div;
 }
 
-function createDivsGrid(div_number, cross_percentage, mutation_percentage) {
+function createDivsGrid(row_size, cross_percentage, mutation_percentage) {
     var essential = document.getElementById("essential");
     essential.innerHTML = "";
-    for(var i = 0; i < div_number; ++i) {
-        for(var j = 0; j < div_number; ++j) {
-            essential.appendChild(createDiv(div_number, i, j, cross_percentage, mutation_percentage));
+    for(var i = 0; i < row_size; ++i) {
+        for(var j = 0; j < row_size; ++j) {
+            essential.appendChild(createDiv(row_size, i, j, cross_percentage, mutation_percentage));
         }
     }
 }
 
 function createDummies(row_size) {
-    dummies = new Array(row_size);
+    genotypes = new Array(row_size);
     for(var i = 0; i < row_size; ++i) {
-        dummies[i] = new Array(row_size);
+        genotypes[i] = new Array(row_size);
         for(var j = 0; j < row_size; ++j) {
-            dummies[i][j] = new Array(row_size);
+            genotypes[i][j] = new Array(row_size);
             for (var k = 0; k < genotype_len; ++k) {
-                dummies[i][j][k] = Math.random();
+                var local_value = Math.random();
+                if(k == 1 || k == 5 || k == 7) {
+                    genotypes[i][j][k] = 0.5 + local_value / 2;
+                } else {
+                    genotypes[i][j][k] = local_value / 2;
+                }
             }
         }
     }
 }
 
-function createEssential(div_number) {
+function createEssential(row_size) {
     var cross_percentage = Number(document.getElementById("cross_percentage_value").innerHTML) / 100.0;
     var mutation_percentage = Number(document.getElementById("mutation_percentage_value").innerHTML) / 100.0;
-    createDummies(div_number);
-    createDivsGrid(div_number, cross_percentage, mutation_percentage);
+    createDummies(row_size);
+    createDivsGrid(row_size, cross_percentage, mutation_percentage);
 }
 
-function updateEssential(div_number) {
+function updateEssential(row_size) {
     var cross_percentage = Number(document.getElementById("cross_percentage_value").innerHTML) / 100.0;
     var mutation_percentage = Number(document.getElementById("mutation_percentage_value").innerHTML) / 100.0;
-    if(prev_number_dummies != div_number) {
-        createDummies(div_number);
-        prev_number_dummies = div_number;
+    // should create new dummies if their number changed
+    if(prev_number_dummies != row_size) {
+        createDummies(row_size);
+        prev_number_dummies = row_size;
     }
-    createDivsGrid(div_number, cross_percentage, mutation_percentage);
+    createDivsGrid(row_size, cross_percentage, mutation_percentage);
 }
 
 function drawLegs(width, height, canvas, genotype) {
@@ -177,7 +189,7 @@ function drawHead(width, height, canvas, genotype) {
 }
 
 function drawDummy(row_size, i, j) {
-    var genotype = dummies[i][j];
+    var genotype = genotypes[i][j];
     var div = document.getElementById(i * row_size + j);
     div.innerHTML = "";
 
@@ -205,24 +217,24 @@ function drawDummies(row_size) {
 }
 
 function refresh() {
-    var div_number = Number(document.getElementById("dummies_number").value);
-    createEssential(div_number);
-    drawDummies(div_number);
+    var row_size = Number(document.getElementById("dummies_number").value);
+    createEssential(row_size);
+    drawDummies(row_size);
 }
 
 $(document).change( function() {
-        var div_number = Number(document.getElementById("dummies_number").value);
+        var row_size = Number(document.getElementById("dummies_number").value);
         showPercentage();
         showNumber();
         showMutations();
-        updateEssential(div_number);
-        drawDummies(div_number);
+        updateEssential(row_size);
+        drawDummies(row_size);
     }
 );
 
 $(document).ready( function() {
-        var div_number = Number(document.getElementById("dummies_number").value);
-        createEssential(div_number);
-        drawDummies(div_number);
+        var row_size = Number(document.getElementById("dummies_number").value);
+        createEssential(row_size);
+        drawDummies(row_size);
     }
 );
