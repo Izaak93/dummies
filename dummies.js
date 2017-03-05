@@ -222,6 +222,11 @@ function refresh() {
     drawDummies(row_size);
 }
 
+function resize() {
+    var row_size = Number(document.getElementById("dummies_number").value);
+    drawDummies(row_size);
+}
+
 $(document).change( function() {
         var row_size = Number(document.getElementById("dummies_number").value);
         showPercentage();
