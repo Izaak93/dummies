@@ -102,10 +102,12 @@ function createDummies(row_size) {
             genotypes[i][j] = new Array(row_size);
             for (var k = 0; k < genotype_len; ++k) {
                 var local_value = Math.random();
-                if(k == 1 || k == 5 || k == 7) {
+                if(k == 1 || k == 5 || k == 7 || k == 10 || k == 6) {
                     genotypes[i][j][k] = 0.5 + local_value / 2;
-                } else {
+                } else if(k == 3 || k == 9 || k == 11 || k == 4 || k == 8) {
                     genotypes[i][j][k] = local_value / 2;
+                } else {
+                    genotypes[i][j][k] = local_value;
                 }
             }
         }
