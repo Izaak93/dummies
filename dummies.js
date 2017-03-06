@@ -242,9 +242,9 @@ function fillValue(id, val) {
 
 function fillInternationalization(lang) {
     console.log(lang);
-    var index = 1;
-    if(lang == "eng") {
-        index = 0;
+    var index = 0;
+    if(lang == "pl") {
+        index = 1;
     }
     for(var i = 0; i < 4; ++i) {
         fillValue("lang-" + String(i), i18n[i][index]);
