@@ -240,24 +240,12 @@ function fillValue(id, val) {
 
 function fillInternationalization(lang) {
     console.log(lang);
+    var index = 1;
     if(lang == "eng") {
-        fillValue("lang-0", i18n[0][0]);
-        console.log(i18n[0][0]);
-        fillValue("lang-1", i18n[1][0]);
-        console.log(i18n[1][0]);
-        fillValue("lang-2", i18n[2][0]);
-        console.log(i18n[2][0]);
-        fillValue("lang-3", i18n[3][0]);
-        console.log(i18n[3][0]);
-    } else {
-        fillValue("lang-0", i18n[0][1]);
-        console.log(i18n[0][1]);
-        fillValue("lang-1", i18n[1][1]);
-        console.log(i18n[1][1]);
-        fillValue("lang-2", i18n[2][1]);
-        console.log(i18n[2][1]);
-        fillValue("lang-3", i18n[3][1]);
-        console.log(i18n[3][1]);
+        index = 0;
+    }
+    for(var i = 0; i < 4; ++i) {
+        fillValue("lang-" + String(i), i18n[i][index]);
     }
 }
 
@@ -275,10 +263,8 @@ $(document).ready( function() {
         var row_size = Number(document.getElementById("dummies_number").value);
         var lang = "";
         if(window.name == "eng" || window.name == "pl") {
-            console.log("BUAHAHAH");
             lang = window.name;
         } else {
-            console.log("BUUUUUU");
             lang = "eng";
         }
         fillInternationalization(lang);
