@@ -1,5 +1,12 @@
 var prev_number_dummies = 2;    // see 112 - (updateEssential())
 
+i18n = [
+    ["Crossing probability", "Prawdopodobieństwo krzyżowania"],
+    ["Dummies number", "Liczba kukiełek"],
+    ["Mutation probability", "Prawdopodobieństwo mutacji"],
+    ["Refresh", "Odśwież"]
+];
+
 /*
  *  body parts  = [left foot, right foot, pelvis, neck, left hand, right hand]
  *  short names = [LF, RF, P, N, LH, RH]
@@ -227,6 +234,33 @@ function resize() {
     drawDummies(row_size);
 }
 
+function fillValue(id, val) {
+    document.getElementById(id).innerHTML = val;
+}
+
+function fillInternationalization(lang) {
+    console.log(lang);
+    if(lang == "eng") {
+        fillValue("lang-0", i18n[0][0]);
+        console.log(i18n[0][0]);
+        fillValue("lang-1", i18n[1][0]);
+        console.log(i18n[1][0]);
+        fillValue("lang-2", i18n[2][0]);
+        console.log(i18n[2][0]);
+        fillValue("lang-3", i18n[3][0]);
+        console.log(i18n[3][0]);
+    } else {
+        fillValue("lang-0", i18n[0][1]);
+        console.log(i18n[0][1]);
+        fillValue("lang-1", i18n[1][1]);
+        console.log(i18n[1][1]);
+        fillValue("lang-2", i18n[2][1]);
+        console.log(i18n[2][1]);
+        fillValue("lang-3", i18n[3][1]);
+        console.log(i18n[3][1]);
+    }
+}
+
 $(document).change( function() {
         var row_size = Number(document.getElementById("dummies_number").value);
         showPercentage();
@@ -239,6 +273,15 @@ $(document).change( function() {
 
 $(document).ready( function() {
         var row_size = Number(document.getElementById("dummies_number").value);
+        var lang = "";
+        if(window.name == "eng" || window.name == "pl") {
+            console.log("BUAHAHAH");
+            lang = window.name;
+        } else {
+            console.log("BUUUUUU");
+            lang = "eng";
+        }
+        fillInternationalization(lang);
         createEssential(row_size);
         drawDummies(row_size);
     }
